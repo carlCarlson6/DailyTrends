@@ -1,0 +1,6 @@
+version: '3.4'
+services:
+  dailytrends.db:
+    image: mongo
+volumes: 
+  mongo_data:
