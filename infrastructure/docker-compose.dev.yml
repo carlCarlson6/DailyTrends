@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-  catalog.db:
+  dailytrends.db:
     container_name: catalog.db
     restart: always
     ports:
