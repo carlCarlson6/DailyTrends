@@ -1,13 +1,20 @@
+import { inject, injectable } from "inversify";
 import { v4 as generateUuid } from "uuid";
+import { TYPES } from "../../IoC/types";
 import { Feed } from "../domain/entities/feed";
 import { FeedNotFoundError } from "../domain/errors/feed-not-found-error";
 import { FeedRepository } from "../domain/services/feed-repository";
 import { Logger } from "../domain/services/logger";
+import { IFeedCrudService } from "./abstractions/feed-crud-service.interface";
+import { IFeedUpdater } from "./abstractions/feed-updater.interface";
 import { CreateFeedCommand } from "./messages/create-feed-command";
 
-export class CRUDFeed {
+@injectable()
+export class FeedCrudService implements IFeedCrudService {
     constructor(
+        @inject(TYPES.FeedRepository) 
         private readonly repository: FeedRepository,
+        @inject(TYPES.Logger)
         private readonly logger: Logger,
     ) {}
 
@@ -26,10 +33,12 @@ export class CRUDFeed {
         return feeds;
     }
 
-    async Read(id: string): Promise<Feed> {
-        const feed = await this.repository.Read(id);
+    async Read(feedId: string): Promise<Feed> {
+        const feed = await this.repository.Read(feedId);
         if (!feed) {
-            throw new FeedNotFoundError(id);
+            const feedNotFoundError = new FeedNotFoundError(feedId);
+            this.logger.LogError(feedNotFoundError.message, []);
+            throw feedNotFoundError;
         }
         return feed;
     }
@@ -39,8 +48,8 @@ export class CRUDFeed {
         await this.repository.Update(feed);
     }
 
-    async Delete(id: string): Promise<void> {
-        const feed = await this.Read(id);
-        await this.repository.Update(feed);
+    async Delete(feedId: string): Promise<void> {
+        const feed = await this.Read(feedId);
+        await this.repository.Delete(feed);
     }
 }

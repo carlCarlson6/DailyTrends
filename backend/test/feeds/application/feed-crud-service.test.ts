@@ -1,16 +1,23 @@
 import { It, Mock, Times } from "moq.ts";
-import { CRUDFeed } from "../../../src/feeds/application/crud-feed";
+import { FeedCrudService } from "../../../src/feeds/application/feed-crud-service";
 import { CreateFeedCommand } from "../../../src/feeds/application/messages/create-feed-command";
 import { Feed } from "../../../src/feeds/domain/entities/feed";
 import { FeedNotFoundError } from "../../../src/feeds/domain/errors/feed-not-found-error";
 import { FeedRepository } from "../../../src/feeds/domain/services/feed-repository";
 import { validate as validateUuid } from "uuid";
 import { Logger } from "../../../src/feeds/domain/services/logger";
+import { IFeedUpdater } from "../../../src/feeds/application/abstractions/feed-updater.interface";
 
-describe("CRUD Feed", () => {
+describe("Feed CRUD Service", () => {
     const feedRepositoryMock = new Mock<FeedRepository>();
     const loggerMock = new Mock<Logger>();
-    const crudFeed = new CRUDFeed(feedRepositoryMock.object(), loggerMock.object());
+    const crudFeed = new FeedCrudService(feedRepositoryMock.object(), loggerMock.object());
+
+    beforeEach(() => {
+        loggerMock.setup(l => l.LogInfo(It.IsAny<string>(), It.IsAny<string[]>())).returns();
+        loggerMock.setup(l => l.LogWarning(It.IsAny<string>(), It.IsAny<string[]>())).returns();
+        loggerMock.setup(l => l.LogError(It.IsAny<string>(), It.IsAny<string[]>())).returns();
+    });
 
     describe("given already stored feeds", () => {
         let feeds: Feed[] = [
@@ -35,7 +42,7 @@ describe("CRUD Feed", () => {
 
     describe("given no feed already stored", () => {
         beforeEach(() => {
-            feedRepositoryMock.setup(fr => fr.Read(It.IsAny<string>())).returns(Promise.resolve(undefined));
+            feedRepositoryMock.setup(fr => fr.Read(It.IsAny<string>())).returns(Promise.resolve(null));
             feedRepositoryMock.setup(fr => fr.ReadAll()).returns(Promise.resolve([]));
             feedRepositoryMock.setup(fr => fr.Save(It.IsAny<Feed>())).returns(Promise.resolve());
         });
