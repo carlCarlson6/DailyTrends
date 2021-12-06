@@ -2,20 +2,33 @@ import { MongoClient } from "mongodb";
 import { Feed } from "../../domain/entities/feed";
 import { config as readEnvConfig } from "dotenv";
 import { MongoContext } from "./mongo-context";
+import { injectable } from "inversify";
 
-export type MongoDbConnector = () => Promise<MongoContext>;
+export interface IMongoDbConnector {
+    Connect(): Promise<MongoContext>;
+    TestConnection(): Promise<void>;
+}
 
-export const connectToMongo: MongoDbConnector = async () => {
-    readEnvConfig();
+@injectable()
+export class MongoDbConnector implements IMongoDbConnector {
+    async TestConnection(): Promise<void> {
+        readEnvConfig();
+        const client = new MongoClient(process.env.MONGO_CONNECTION_STRING!);
+        await client.connect();
+        await client.close();
+    }
 
-    const client = new MongoClient(process.env.MONGO_CONNECTION_STRING!);
+    async Connect(): Promise<MongoContext> {
+        readEnvConfig();
+
+        const client = new MongoClient(process.env.MONGO_CONNECTION_STRING!);
+        await client.connect();
             
-    await client.connect();
-        
-    const db = client.db(process.env.MONGO_DAILYTRENDS_DB!);
-    const feedsCollection = db.collection<Feed>(process.env.MONGO_FEEDS_COLLECTION_NAME!);
-
-    return {
-        feeds: feedsCollection
-    };
-};
+        const db = client.db(process.env.MONGO_DAILYTRENDS_DB!);
+        const feedsCollection = db.collection<Feed>(process.env.MONGO_FEEDS_COLLECTION_NAME!);
+    
+        return {
+            feeds: feedsCollection
+        };
+    }
+}
