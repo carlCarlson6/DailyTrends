@@ -1,7 +1,9 @@
+import { injectable } from "inversify";
 import scrapeIt from "scrape-it";
 import { Article } from "../../domain/entities/article";
 import { FeedReader } from "../../domain/services/feed-reader";
 
+@injectable()
 export class ElPaisReader implements FeedReader {
     private readonly url = "https://elpais.com/";
     private readonly publisher = "El Pais";

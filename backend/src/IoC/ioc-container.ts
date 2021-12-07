@@ -13,6 +13,8 @@ import { TYPES } from "./types";
 import { FeedReader } from "../feeds/domain/services/feed-reader";
 import { WebScrapper } from "../feeds/infrastructure/scrapeit-reader/web-scrapper";
 import { ExpressFeedsController } from "../apps/api/express-feeds-controller";
+import { ElMundoReader } from "../feeds/infrastructure/scrapeit-reader/el-mundo-reader";
+import { ElPaisReader } from "../feeds/infrastructure/scrapeit-reader/el-pais-reader";
 
 type addDependencies = (container: Container) => Container;
 
@@ -28,7 +30,8 @@ const addRepositories: addDependencies = (container: Container) => {
 }
 
 const addDomainServices: addDependencies = (container: Container) => {
-    container.bind<FeedReader>(TYPES.FeedReader).to(WebScrapper)
+    container.bind<FeedReader>(TYPES.ElPaisFeedReader).to(ElPaisReader);
+    container.bind<FeedReader>(TYPES.ElMundoFeedReader).to(ElMundoReader);
     return container;
 }
 

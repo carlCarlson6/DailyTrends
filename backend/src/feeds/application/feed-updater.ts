@@ -9,8 +9,10 @@ import { IFeedUpdater } from "./abstractions/feed-updater.interface";
 @injectable()
 export class FeedUpdater implements IFeedUpdater {
     constructor(
-        @inject(TYPES.FeedReader)
-        private readonly feedReader: FeedReader,
+        @inject(TYPES.ElPaisFeedReader)
+        private readonly elPaisFeedReader: FeedReader,
+        @inject(TYPES.ElMundoFeedReader)
+        private readonly elMundoFeedReader: FeedReader,
         @inject(TYPES.FeedRepository)
         private readonly feedRepository: FeedRepository,
         @inject(TYPES.Logger)
