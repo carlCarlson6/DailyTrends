@@ -11,7 +11,7 @@ import { IMongoDbConnector, MongoDbConnector } from "../feeds/infrastructure/mon
 import { MongoFeedRepository } from "../feeds/infrastructure/mongo/mongo-feed-repository";
 import { TYPES } from "./types";
 import { FeedReader } from "../feeds/domain/services/feed-reader";
-import { WebScrapper } from "../feeds/infrastructure/web-scrapper";
+import { WebScrapper } from "../feeds/infrastructure/scrapeit-reader/web-scrapper";
 import { ExpressFeedsController } from "../apps/api/express-feeds-controller";
 
 type addDependencies = (container: Container) => Container;

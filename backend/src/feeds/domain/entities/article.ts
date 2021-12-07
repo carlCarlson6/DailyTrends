@@ -1,4 +1,7 @@
 export interface Article {
-    id: string,
-    feed: string
+    title: string,
+    source: string,
+    body: string,
+    publisher: string,
+    image: string
 }
