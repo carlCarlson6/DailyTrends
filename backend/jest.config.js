@@ -13,5 +13,6 @@ module.exports = {
     collectCoverage: false,
     coverageDirectory: "coverage",
     verbose: true,
-    testTimeout: 20000
+    testTimeout: 20000,
+    setupFiles: ['./src/IoC/ioc-container.ts']
   };
