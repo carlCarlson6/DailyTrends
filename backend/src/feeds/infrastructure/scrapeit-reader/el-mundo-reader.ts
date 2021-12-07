@@ -42,8 +42,6 @@ export class ElMundoReader implements FeedReader {
             }
         });
 
-        console.log(result.data.body[0]);
-
         return {
             title: article.title,
             body: result.data.body[0].text,
