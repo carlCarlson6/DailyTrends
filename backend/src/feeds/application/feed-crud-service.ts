@@ -6,8 +6,7 @@ import { FeedNotFoundError } from "../domain/errors/feed-not-found-error";
 import { FeedRepository } from "../domain/services/feed-repository";
 import { Logger } from "../domain/services/logger";
 import { IFeedCrudService } from "./abstractions/feed-crud-service.interface";
-import { IFeedUpdater } from "./abstractions/feed-updater.interface";
-import { CreateFeedCommand } from "./messages/create-feed-command";
+import { CreateFeedCommand } from "../domain/commands/create-feed-command";
 
 @injectable()
 export class FeedCrudService implements IFeedCrudService {
@@ -19,12 +18,8 @@ export class FeedCrudService implements IFeedCrudService {
     ) {}
 
     async Create(command: CreateFeedCommand): Promise<Feed> {
-        const { title, body, image, source, publisher } = command;
-        const id = generateUuid();
-        const feed = new Feed(id, title, body, image, source, publisher);
-
+        const feed = Feed.CreateFromCommand(command);
         await this.repository.Save(feed);
-
         return feed;
     }
 
