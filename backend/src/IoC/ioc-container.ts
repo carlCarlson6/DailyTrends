@@ -14,6 +14,8 @@ import { ArticleReader } from "../feeds/domain/services/article-reader";
 import { ExpressFeedsController } from "../apps/api/controllers/express-feeds-controller";
 import { ElMundoReader } from "../feeds/infrastructure/scrapeit-reader/el-mundo-reader";
 import { ElPaisReader } from "../feeds/infrastructure/scrapeit-reader/el-pais-reader";
+import { IFeedQueryHandler } from "../feeds/application/abstractions/feed-query-handler.interface";
+import { FeedQueryHandler } from "../feeds/application/feed-query-handler";
 
 type addDependencies = (container: Container) => Container;
 
@@ -37,6 +39,7 @@ const addDomainServices: addDependencies = (container: Container) => {
 const addApplicationServices: addDependencies = (container: Container) => {
     container.bind<IFeedReader>(TYPES.IFeedReader).to(FeedReader);
     container.bind<IFeedCrudService>(TYPES.IFeedCrudService).to(FeedCrudService);
+    container.bind<IFeedQueryHandler>(TYPES.IFeedQueryHandler).to(FeedQueryHandler);
     return container;
 }
 

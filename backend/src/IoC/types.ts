@@ -9,6 +9,7 @@ export const TYPES = {
 
     IFeedReader: Symbol.for("IFeedReader"),
     IFeedCrudService: Symbol.for("IFeedCrudService"),
+    IFeedQueryHandler: Symbol.for("IFeedQueryHandler"),
 
     ExpressFeedsController: Symbol.for("ExpressFeedsController"),
 };
