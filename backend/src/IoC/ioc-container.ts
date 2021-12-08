@@ -11,8 +11,7 @@ import { IMongoDbConnector, MongoDbConnector } from "../feeds/infrastructure/mon
 import { MongoFeedRepository } from "../feeds/infrastructure/mongo/mongo-feed-repository";
 import { TYPES } from "./types";
 import { FeedReader } from "../feeds/domain/services/feed-reader";
-import { WebScrapper } from "../feeds/infrastructure/scrapeit-reader/web-scrapper";
-import { ExpressFeedsController } from "../apps/api/express-feeds-controller";
+import { ExpressFeedsController } from "../apps/api/controllers/express-feeds-controller";
 import { ElMundoReader } from "../feeds/infrastructure/scrapeit-reader/el-mundo-reader";
 import { ElPaisReader } from "../feeds/infrastructure/scrapeit-reader/el-pais-reader";
 

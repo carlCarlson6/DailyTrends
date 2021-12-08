@@ -1,6 +1,7 @@
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../../IoC/types";
 import { Feed } from "../../domain/entities/feed";
+import { RepositoryTransactionError } from "../../domain/errors/repository-transaction-error";
 import { FeedRepository } from "../../domain/services/feed-repository";
 import { Logger } from "../../domain/services/logger";
 import { IMongoDbConnector } from "./mongo-connector";
@@ -21,8 +22,7 @@ export class MongoFeedRepository implements FeedRepository {
         const insertResult = await context.feeds.insertOne(feed);
 
         if (!insertResult.acknowledged) {
-            const errorMessage = `insert transaction failed of feed ${feed}`;
-            this.logger.LogError(errorMessage, [JSON.stringify({feed})]);
+            this.LogAndThrowError(`insert transaction failed of feed ${feed}`, [JSON.stringify({feed})]);
         }
     }
 
@@ -45,9 +45,7 @@ export class MongoFeedRepository implements FeedRepository {
         const updateResult = await context.feeds.updateOne({ id: feed.id }, { $set: feed });
 
         if (!updateResult.acknowledged && updateResult.matchedCount !== 1 && updateResult.modifiedCount !== 1 && updateResult.upsertedCount !== 1) {
-            const errorMessage = `update transaction was not completed correctly of feed ${feed}`;
-            this.logger.LogError(errorMessage, [JSON.stringify({feed})]);
-            throw new Error(errorMessage);
+            this.LogAndThrowError(`update transaction was not completed correctly of feed ${feed}`, [JSON.stringify({feed})]);
         }
     }
 
@@ -58,9 +56,12 @@ export class MongoFeedRepository implements FeedRepository {
         var deleteResult = await context.feeds.deleteOne({ id: feed.id });
         
         if(!deleteResult.acknowledged && deleteResult.deletedCount !== 1) {
-            const errorMessage = `could not delete feed ${feed}`;
-            this.logger.LogError(errorMessage, [JSON.stringify({feed})]);
-            throw new Error(errorMessage);
+            this.LogAndThrowError(`could not delete feed ${feed}`, [JSON.stringify({feed})]);
         }
+    }
+
+    private LogAndThrowError(errorMessage: string, parameters: string[]): void {
+        this.logger.LogError(errorMessage, parameters);
+        throw new RepositoryTransactionError(errorMessage);
     }
 }
