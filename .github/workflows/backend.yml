@@ -1,9 +1,9 @@
-name: test
+name: BACKEND-CI
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  CI:
     runs-on: ubuntu-latest
 
     steps:
