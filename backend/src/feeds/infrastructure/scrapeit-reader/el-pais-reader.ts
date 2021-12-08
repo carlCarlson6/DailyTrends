@@ -1,14 +1,23 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import scrapeIt from "scrape-it";
+import { TYPES } from "../../../IoC/types";
 import { Article } from "../../domain/entities/article";
 import { ArticleReader } from "../../domain/services/article-reader";
+import { Logger } from "../../domain/services/logger";
 
 @injectable()
 export class ElPaisReader implements ArticleReader {
     private readonly url = "https://elpais.com/";
     private readonly publisher = "El Pais";
 
+    constructor(
+        @inject(TYPES.Logger)
+        private readonly logger: Logger,
+    ) {}
+
     async Read(): Promise<Article[]> {
+        this.logger.LogInfo("reading articles", [this.publisher, this.url])
+
         const articleInFrontPage = await this.ScrapeArticlesInFrontPage();
         const top5Articles = articleInFrontPage
             .filter(article => !article.source.includes("editoriales"))
