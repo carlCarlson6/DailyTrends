@@ -59,11 +59,11 @@ describe("Feed CRUD Service", () => {
 
                 feedRepositoryMock.verify(fr => fr.Save(feed), Times.Once());
 
-                expect(feed).not.toBeNull();
+                expect(feed).not.toBeUndefined();
                 expect(feed).not.toBeNull();
 
                 expect(validateUuid(feed.id)).toBeTruthy();
-                expect(feed).toEqual({ id: feed.id, title, body, image, source, publisher });
+                expect(feed).toEqual({ id: feed.id, title, body, image, source, publisher, date: feed.date });
             });
         });
 

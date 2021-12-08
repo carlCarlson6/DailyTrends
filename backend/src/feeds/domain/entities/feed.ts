@@ -10,7 +10,7 @@ export class Feed {
         readonly image: string,
         readonly source: string,
         readonly publisher: string,
-        readonly Data: Date,
+        readonly date: Date,
     ) { }
 
     static CreateFromArticle(article: Article): Feed {
@@ -29,8 +29,8 @@ export class Feed {
         return new Feed(
             generateUuid(), 
             command.title, 
-            command.title, 
-            command.title, 
+            command.body, 
+            command.image, 
             command.source, 
             command.publisher, 
             new Date()
