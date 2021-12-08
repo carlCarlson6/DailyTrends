@@ -1,5 +1,5 @@
 import { Feed } from "../../domain/entities/feed";
-import { CreateFeedCommand } from "../messages/create-feed-command";
+import { CreateFeedCommand } from "../../domain/commands/create-feed-command";
 
 export interface IFeedCrudService {
     Create(command: CreateFeedCommand): Promise<Feed>;

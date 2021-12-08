@@ -1,16 +1,16 @@
 import "reflect-metadata";
 import { Container } from "inversify";
 import { IFeedCrudService } from "../feeds/application/abstractions/feed-crud-service.interface";
-import { IFeedUpdater } from "../feeds/application/abstractions/feed-updater.interface";
+import { IFeedReader } from "../feeds/application/abstractions/feed-reader.interface";
 import { FeedCrudService } from "../feeds/application/feed-crud-service";
-import { FeedUpdater } from "../feeds/application/feed-updater";
+import { FeedReader} from "../feeds/application/feed-reader";
 import { FeedRepository } from "../feeds/domain/services/feed-repository";
 import { Logger } from "../feeds/domain/services/logger";
 import { ConsoleLogger } from "../feeds/infrastructure/console-logger";
 import { IMongoDbConnector, MongoDbConnector } from "../feeds/infrastructure/mongo/mongo-connector";
 import { MongoFeedRepository } from "../feeds/infrastructure/mongo/mongo-feed-repository";
 import { TYPES } from "./types";
-import { FeedReader } from "../feeds/domain/services/feed-reader";
+import { ArticleReader } from "../feeds/domain/services/article-reader";
 import { ExpressFeedsController } from "../apps/api/controllers/express-feeds-controller";
 import { ElMundoReader } from "../feeds/infrastructure/scrapeit-reader/el-mundo-reader";
 import { ElPaisReader } from "../feeds/infrastructure/scrapeit-reader/el-pais-reader";
@@ -29,13 +29,13 @@ const addRepositories: addDependencies = (container: Container) => {
 }
 
 const addDomainServices: addDependencies = (container: Container) => {
-    container.bind<FeedReader>(TYPES.ElPaisFeedReader).to(ElPaisReader);
-    container.bind<FeedReader>(TYPES.ElMundoFeedReader).to(ElMundoReader);
+    container.bind<ArticleReader>(TYPES.ElPaisReader).to(ElPaisReader);
+    container.bind<ArticleReader>(TYPES.ElMundoReader).to(ElMundoReader);
     return container;
 }
 
 const addApplicationServices: addDependencies = (container: Container) => {
-    container.bind<IFeedUpdater>(TYPES.IFeedUpdater).to(FeedUpdater);
+    container.bind<IFeedReader>(TYPES.IFeedReader).to(FeedReader);
     container.bind<IFeedCrudService>(TYPES.IFeedCrudService).to(FeedCrudService);
     return container;
 }

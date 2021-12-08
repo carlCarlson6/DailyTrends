@@ -9,7 +9,6 @@ export const createResponseByError = (response: Response, error: unknown): Respo
         response.status(404).send({error: e.message});
     } 
     else if (e instanceof RepositoryTransactionError) {
-        console.log("here");
         response.status(500).send({error: e.message});
     } else {
         response.status(500).send({error: `an uncontrolled error happen - ${e.message}`});

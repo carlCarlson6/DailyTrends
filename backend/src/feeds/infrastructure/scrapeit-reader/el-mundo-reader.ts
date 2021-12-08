@@ -1,14 +1,23 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import scrapeIt from "scrape-it";
+import { TYPES } from "../../../IoC/types";
 import { Article } from "../../domain/entities/article";
-import { FeedReader } from "../../domain/services/feed-reader";
+import { ArticleReader } from "../../domain/services/article-reader";
+import { Logger } from "../../domain/services/logger";
 
 @injectable()
-export class ElMundoReader implements FeedReader {
+export class ElMundoReader implements ArticleReader {
     private readonly url = "https://www.elmundo.es/";
     private readonly publisher = "El Mundo";
     
+    constructor(
+        @inject(TYPES.Logger)
+        private readonly logger: Logger,
+    ) {}
+
     async Read(): Promise<Article[]> {
+        this.logger.LogInfo("reading articles", [this.publisher, this.url])
+
         const articlesInFronPage = await this.ScrapeArticlesInFrontPage();
         const top5Articles = articlesInFronPage.slice(0, 5);
 
@@ -55,7 +64,6 @@ export class ElMundoReader implements FeedReader {
             },
             image: {
                 selector: "img",
-                //selector: "img.ue-c-article__image",
                 attr: "src"
             }
         });

@@ -2,7 +2,7 @@ import e, { Request, Response } from "express";
 import { It, Mock, Times } from "moq.ts";
 import { ExpressFeedsController } from "../../../src/apps/api/controllers/express-feeds-controller";
 import { IFeedCrudService } from "../../../src/feeds/application/abstractions/feed-crud-service.interface";
-import { CreateFeedCommand } from "../../../src/feeds/application/messages/create-feed-command";
+import { CreateFeedCommand } from "../../../src/feeds/domain/commands/create-feed-command";
 import { Feed } from "../../../src/feeds/domain/entities/feed";
 import { FeedNotFoundError } from "../../../src/feeds/domain/errors/feed-not-found-error";
 import { RepositoryTransactionError } from "../../../src/feeds/domain/errors/repository-transaction-error";
