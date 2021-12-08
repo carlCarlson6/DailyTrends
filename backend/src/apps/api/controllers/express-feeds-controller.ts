@@ -1,11 +1,8 @@
 import { Request, Response } from "express";
 import { inject, injectable } from "inversify";
 import { IFeedCrudService } from "../../../feeds/application/abstractions/feed-crud-service.interface";
-import { IFeedUpdater } from "../../../feeds/application/abstractions/feed-updater.interface";
-import { CreateFeedCommand } from "../../../feeds/application/messages/create-feed-command";
+import { CreateFeedCommand } from "../../../feeds/domain/commands/create-feed-command";
 import { Feed } from "../../../feeds/domain/entities/feed";
-import { FeedNotFoundError } from "../../../feeds/domain/errors/feed-not-found-error";
-import { RepositoryTransactionError } from "../../../feeds/domain/errors/repository-transaction-error";
 import { Logger } from "../../../feeds/domain/services/logger";
 import { TYPES } from "../../../IoC/types";
 import { createResponseByError } from "./create-response-by-error";
