@@ -1,12 +1,11 @@
 import { It, Mock, Times } from "moq.ts";
 import { FeedCrudService } from "../../../src/feeds/application/feed-crud-service";
-import { CreateFeedCommand } from "../../../src/feeds/application/messages/create-feed-command";
+import { CreateFeedCommand } from "../../../src/feeds/domain/commands/create-feed-command";
 import { Feed } from "../../../src/feeds/domain/entities/feed";
 import { FeedNotFoundError } from "../../../src/feeds/domain/errors/feed-not-found-error";
 import { FeedRepository } from "../../../src/feeds/domain/services/feed-repository";
 import { validate as validateUuid } from "uuid";
 import { Logger } from "../../../src/feeds/domain/services/logger";
-import { IFeedUpdater } from "../../../src/feeds/application/abstractions/feed-updater.interface";
 
 describe("Feed CRUD Service", () => {
     const feedRepositoryMock = new Mock<FeedRepository>();
@@ -21,9 +20,9 @@ describe("Feed CRUD Service", () => {
 
     describe("given already stored feeds", () => {
         let feeds: Feed[] = [
-            new Feed("", "", "", "", "", ""),
-            new Feed("", "", "", "", "", ""),
-            new Feed("", "", "", "", "", ""),
+            new Feed("", "", "", "", "", "", new Date()),
+            new Feed("", "", "", "", "", "", new Date()),
+            new Feed("", "", "", "", "", "", new Date()),
         ];
 
         beforeEach(() => {
@@ -85,7 +84,7 @@ describe("Feed CRUD Service", () => {
 
         it("when Update then FeedNotFoundError is thrown", async () => {
             const feedId = "some-id";
-            const feed = new Feed(feedId, "some-title", "some-body", "some-image", "some-source", "some-publisher");
+            const feed = new Feed(feedId, "some-title", "some-body", "some-image", "some-source", "some-publisher", new Date());
             const errorThrower = async () => await crudFeed.Update(feed);
             expect(errorThrower).rejects.toThrow(FeedNotFoundError);
             expect(errorThrower).rejects.toThrow(`feed with id ${feedId} was not found`);
