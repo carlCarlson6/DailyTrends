@@ -4,7 +4,8 @@ export const TYPES = {
     IMongoDbConnector: Symbol.for("IMongoDbConnector"),
     FeedRepository: Symbol.for("FeedRepository"),
 
-    FeedReader: Symbol.for("FeedReader"),
+    ElMundoFeedReader: Symbol.for("ElMundoFeedReader"),
+    ElPaisFeedReader: Symbol.for("ElPaisFeedReader"),
 
     IFeedUpdater: Symbol.for("IFeedUpdater"),
     IFeedCrudService: Symbol.for("IFeedCrudService"),
