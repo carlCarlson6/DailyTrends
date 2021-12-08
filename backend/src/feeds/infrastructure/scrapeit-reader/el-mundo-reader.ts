@@ -22,13 +22,19 @@ export class ElMundoReader implements ArticleReader {
         const top5Articles = articlesInFronPage.slice(0, 5);
 
         const enrichedArticles = await Promise.all(
-            top5Articles.map(async article => this.EnrichArticleData(article))
+            top5Articles.map(async article => this.EnrichArticleData({
+                Title: article.title,
+                Source: article.source,
+                Publisher: this.publisher,
+                Body: "",
+                Image: ""
+            }))
         );
         return enrichedArticles;
     }
 
-    private async ScrapeArticlesInFrontPage(): Promise<Article[]> {
-        const result = await scrapeIt<{articles: Article[]}>(this.url, {
+    private async ScrapeArticlesInFrontPage(): Promise<{title: string, source: string}[]> {
+        const result = await scrapeIt<{articles: {title: string, source: string}[]}>(this.url, {
             articles: {
                 listItem: "article",
                 data: {

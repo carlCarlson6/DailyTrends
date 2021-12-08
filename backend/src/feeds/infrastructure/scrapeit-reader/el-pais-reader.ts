@@ -20,17 +20,25 @@ export class ElPaisReader implements ArticleReader {
 
         const articleInFrontPage = await this.ScrapeArticlesInFrontPage();
         const top5Articles = articleInFrontPage
-            .filter(article => !article.Source.includes("editoriales"))
+            .filter(article => 
+                (article.source !== undefined && article.source !== null && article.source !== "") && 
+                !(article.source.includes("opinion") || article.source.includes("editoriales")))
             .slice(0, 5);
 
         const enrichedArticles = await Promise.all(
-            top5Articles.map(async article => this.EnrichArticleData(article))
+            top5Articles.map(async article => this.EnrichArticleData({
+                Title: article.title,
+                Source: article.source,
+                Body: "",
+                Publisher: this.publisher,
+                Image: "",
+            }))
         );
         return enrichedArticles;
     }
 
-    private async ScrapeArticlesInFrontPage(): Promise<Article[]> {
-        const result = await scrapeIt<{articles: Article[]}>(this.url, {
+    private async ScrapeArticlesInFrontPage(): Promise<{title: string, source: string}[]> {
+        const result = await scrapeIt<{articles: {title: string, source: string}[]}>(this.url, {
             articles: {
                 listItem: "article",
                 data: {
@@ -46,7 +54,7 @@ export class ElPaisReader implements ArticleReader {
     }
 
     private async EnrichArticleData(article: Article): Promise<Article> {
-        const articleWithSource = {...article, source: this.url+article.Source};
+        const articleWithSource = {...article, Source: this.url+article.Source};
         const mainArticleData = await this.ScrapeMainArticleData(articleWithSource);
 
         return {
