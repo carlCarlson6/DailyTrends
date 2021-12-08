@@ -1,5 +1,5 @@
 import { Article } from "../entities/article";
 
-export interface FeedReader {
+export interface ArticleReader {
     Read(): Promise<Article[]>
 }

@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import scrapeIt from "scrape-it";
 import { Article } from "../../domain/entities/article";
-import { FeedReader } from "../../domain/services/feed-reader";
+import { ArticleReader } from "../../domain/services/article-reader";
 
 @injectable()
-export class ElMundoReader implements FeedReader {
+export class ElMundoReader implements ArticleReader {
     private readonly url = "https://www.elmundo.es/";
     private readonly publisher = "El Mundo";
     

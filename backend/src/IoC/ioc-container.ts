@@ -10,7 +10,7 @@ import { ConsoleLogger } from "../feeds/infrastructure/console-logger";
 import { IMongoDbConnector, MongoDbConnector } from "../feeds/infrastructure/mongo/mongo-connector";
 import { MongoFeedRepository } from "../feeds/infrastructure/mongo/mongo-feed-repository";
 import { TYPES } from "./types";
-import { FeedReader } from "../feeds/domain/services/feed-reader";
+import { ArticleReader } from "../feeds/domain/services/article-reader";
 import { ExpressFeedsController } from "../apps/api/controllers/express-feeds-controller";
 import { ElMundoReader } from "../feeds/infrastructure/scrapeit-reader/el-mundo-reader";
 import { ElPaisReader } from "../feeds/infrastructure/scrapeit-reader/el-pais-reader";
@@ -29,8 +29,8 @@ const addRepositories: addDependencies = (container: Container) => {
 }
 
 const addDomainServices: addDependencies = (container: Container) => {
-    container.bind<FeedReader>(TYPES.ElPaisFeedReader).to(ElPaisReader);
-    container.bind<FeedReader>(TYPES.ElMundoFeedReader).to(ElMundoReader);
+    container.bind<ArticleReader>(TYPES.ElPaisReader).to(ElPaisReader);
+    container.bind<ArticleReader>(TYPES.ElMundoReader).to(ElMundoReader);
     return container;
 }
 
