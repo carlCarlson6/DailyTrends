@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { container } from "../../../IoC/ioc-container";
 import { TYPES } from "../../../IoC/types";
-import { ExpressFeedsController } from "../express-feeds-controller";
+import { ExpressFeedsController } from "../controllers/express-feeds-controller";
 import { ExpressRouter } from "./abstractions/express-router";
 
 export class FeedsRoutes implements ExpressRouter {
