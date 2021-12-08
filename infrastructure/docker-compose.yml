@@ -1,11 +1,21 @@
 version: '3.4'
+
 services:
+
+  dailytrends.web:
+    image: ${DOCCKER_REGISTRY-}dailytrendsweb
+    build:
+      context: ../frontend
+      dockerfile: ../frontend/Dockerfile
+
   dailytrends.api:
     image: ${DOCCKER_REGISTRY-}dailytrendsapi
     build:
       context: ../backend
       dockerfile: ../backend/Dockerfile
+
   dailytrends.db:
     image: mongo
+
 volumes: 
   mongo_data:
