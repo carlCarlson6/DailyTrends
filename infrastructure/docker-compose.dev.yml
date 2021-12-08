@@ -1,5 +1,14 @@
 version: '3.4'
+
 services:
+  
+  dailytrends.web:
+    container_name: dailytrends.web
+    depends_on:
+      - dailytrends.api
+    ports:
+      - "4200:80"
+  
   dailytrends.api:
     container_name: dailytrends.api
     depends_on: 
@@ -12,6 +21,7 @@ services:
       - MONGO_FEEDS_COLLECTION_NAME=feeds
       - API_PORT=8080
       - UPDATE_ALL_FEEDS_CRON_TIME_JOB=00 00 6 * * *
+  
   dailytrends.db:
     container_name: dailytrends.db
     restart: always
