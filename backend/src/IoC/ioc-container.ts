@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import { Container } from "inversify";
 import { IFeedCrudService } from "../feeds/application/abstractions/feed-crud-service.interface";
-import { IFeedUpdater } from "../feeds/application/abstractions/feed-updater.interface";
+import { IFeedReader } from "../feeds/application/abstractions/feed-reader.interface";
 import { FeedCrudService } from "../feeds/application/feed-crud-service";
-import { FeedUpdater } from "../feeds/application/feed-updater";
+import { FeedReader} from "../feeds/application/feed-reader";
 import { FeedRepository } from "../feeds/domain/services/feed-repository";
 import { Logger } from "../feeds/domain/services/logger";
 import { ConsoleLogger } from "../feeds/infrastructure/console-logger";
@@ -35,7 +35,7 @@ const addDomainServices: addDependencies = (container: Container) => {
 }
 
 const addApplicationServices: addDependencies = (container: Container) => {
-    container.bind<IFeedUpdater>(TYPES.IFeedUpdater).to(FeedUpdater);
+    container.bind<IFeedReader>(TYPES.IFeedReader).to(FeedReader);
     container.bind<IFeedCrudService>(TYPES.IFeedCrudService).to(FeedCrudService);
     return container;
 }
