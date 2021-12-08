@@ -31,6 +31,7 @@ describe("Express Feeds Controller", () => {
             feedCrudServiceMock.setup(fc => fc.ReadAll()).returns(Promise.resolve(It.IsAny<Feed[]>()));
 
             const {requestMock, responseMock} = buildRequestResponseMocks();
+            requestMock.setup(r => r.query).returns({});
             responseMock.setup(r => r.status(200)).returns(responseMock.object());
             responseMock.setup(r => r.send(It.IsAny<Feed[]>())).returns(responseMock.object());
 
@@ -110,6 +111,7 @@ describe("Express Feeds Controller", () => {
                 feedCrudServiceMock.setup(fc => fc.ReadAll()).throws(error);
             
                 let {requestMock, responseMock} = buildRequestResponseMocks();
+                requestMock.setup(r => r.query).returns({});
                 responseMock = setupResponseMock(responseMock, error);
 
                 await controller.Get(requestMock.object(), responseMock.object());
