@@ -19,11 +19,11 @@ describe("El Mundo reader", () => {
         expect(feeds).toHaveLength(5);
 
         feeds.forEach(feed => {
-            expect(feed.title).not.toEqual('');
-            expect(feed.body).not.toEqual('');
-            expect(feed.image).not.toEqual('');
-            expect(feed.publisher).not.toEqual('');
-            expect(feed.source).not.toEqual('');
+            expect(feed.Title).not.toEqual('');
+            expect(feed.Body).not.toEqual('');
+            expect(feed.Image).not.toEqual('');
+            expect(feed.Publisher).not.toEqual('');
+            expect(feed.Source).not.toEqual('');
         });
     });
 });

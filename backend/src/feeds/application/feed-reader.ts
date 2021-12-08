@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../IoC/types";
-import { Article } from "../domain/entities/article";
+import { Article } from "../domain/dtos/article";
 import { Feed } from "../domain/entities/feed";
 import { ArticleReader } from "../domain/services/article-reader";
 import { FeedRepository } from "../domain/services/feed-repository";
@@ -47,7 +47,7 @@ export class FeedReader implements IFeedReader {
 
     private async GetArticlesToAdd(alreadySavedSources: string[]): Promise<Article[]> {
         const articles = (await Promise.all(this.articleReaders.map(reader => reader.Read()))).flat()
-        return articles.filter(article => alreadySavedSources.every(source => source !== article.source));
+        return articles.filter(article => alreadySavedSources.every(source => source !== article.Source));
     }
 
     private async SaveArticles(articles: Article[]): Promise<void> {

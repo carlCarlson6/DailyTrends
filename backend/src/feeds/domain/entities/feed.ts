@@ -1,4 +1,4 @@
-import { Article } from "./article";
+import { Article } from "../dtos/article";
 import { v4 as generateUuid } from "uuid";
 import { CreateFeedCommand } from "../commands/create-feed-command";
 
@@ -16,11 +16,11 @@ export class Feed {
     static CreateFromArticle(article: Article): Feed {
         return new Feed(
             generateUuid(),
-            article.title,
-            article.body,
-            article.image,
-            article.source,
-            article.publisher,
+            article.Title,
+            article.Body,
+            article.Image,
+            article.Source,
+            article.Publisher,
             new Date()
         )
     }
