@@ -2,6 +2,7 @@ import e, { Request, Response } from "express";
 import { It, Mock, Times } from "moq.ts";
 import { ExpressFeedsController } from "../../../src/apps/api/controllers/express-feeds-controller";
 import { IFeedCrudService } from "../../../src/feeds/application/abstractions/feed-crud-service.interface";
+import { IFeedQueryHandler } from "../../../src/feeds/application/abstractions/feed-query-handler.interface";
 import { CreateFeedCommand } from "../../../src/feeds/domain/commands/create-feed-command";
 import { Feed } from "../../../src/feeds/domain/entities/feed";
 import { FeedNotFoundError } from "../../../src/feeds/domain/errors/feed-not-found-error";
@@ -10,8 +11,9 @@ import { Logger } from "../../../src/feeds/domain/services/logger";
 
 describe("Express Feeds Controller", () => {
     const feedCrudServiceMock = new Mock<IFeedCrudService>();
+    const queryHandlerMock = new Mock<IFeedQueryHandler>();
     const loggerMock = new Mock<Logger>();
-    const controller = new ExpressFeedsController(feedCrudServiceMock.object(), loggerMock.object());
+    const controller = new ExpressFeedsController(feedCrudServiceMock.object(), queryHandlerMock.object(), loggerMock.object());
     
     const buildRequestResponseMocks = () => ({
         requestMock: new Mock<Request>(),
@@ -29,6 +31,7 @@ describe("Express Feeds Controller", () => {
             feedCrudServiceMock.setup(fc => fc.ReadAll()).returns(Promise.resolve(It.IsAny<Feed[]>()));
 
             const {requestMock, responseMock} = buildRequestResponseMocks();
+            requestMock.setup(r => r.query).returns({});
             responseMock.setup(r => r.status(200)).returns(responseMock.object());
             responseMock.setup(r => r.send(It.IsAny<Feed[]>())).returns(responseMock.object());
 
@@ -108,6 +111,7 @@ describe("Express Feeds Controller", () => {
                 feedCrudServiceMock.setup(fc => fc.ReadAll()).throws(error);
             
                 let {requestMock, responseMock} = buildRequestResponseMocks();
+                requestMock.setup(r => r.query).returns({});
                 responseMock = setupResponseMock(responseMock, error);
 
                 await controller.Get(requestMock.object(), responseMock.object());

@@ -4,6 +4,7 @@ import { Feed } from "../../domain/entities/feed";
 import { RepositoryTransactionError } from "../../domain/errors/repository-transaction-error";
 import { FeedRepository } from "../../domain/services/feed-repository";
 import { Logger } from "../../domain/services/logger";
+import { Specification } from "../../domain/specifications/specification";
 import { IMongoDbConnector } from "./mongo-connector";
 
 @injectable()
@@ -36,6 +37,14 @@ export class MongoFeedRepository implements FeedRepository {
         const context = await this.dbConnector.Connect();
         const feed = await context.feeds.findOne({ id })
         return feed;
+    }
+
+    async Find(speficication: Specification<Feed>): Promise<Feed[]> {
+        const context = await this.dbConnector.Connect();
+        const feeds = await context.feeds.find({}).toArray();
+        
+        const feedsBySpaceification = feeds.filter(feed => speficication.ToExpression()(feed));
+        return feedsBySpaceification;
     }
     
     async Update(feed: Feed): Promise<void> {

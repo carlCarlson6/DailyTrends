@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import scrapeIt from "scrape-it";
 import { TYPES } from "../../../IoC/types";
-import { Article } from "../../domain/entities/article";
+import { Article } from "../../domain/dtos/article";
 import { ArticleReader } from "../../domain/services/article-reader";
 import { Logger } from "../../domain/services/logger";
 
@@ -22,13 +22,19 @@ export class ElMundoReader implements ArticleReader {
         const top5Articles = articlesInFronPage.slice(0, 5);
 
         const enrichedArticles = await Promise.all(
-            top5Articles.map(async article => this.EnrichArticleData(article))
+            top5Articles.map(async article => this.EnrichArticleData({
+                Title: article.title,
+                Source: article.source,
+                Publisher: this.publisher,
+                Body: "",
+                Image: ""
+            }))
         );
         return enrichedArticles;
     }
 
-    private async ScrapeArticlesInFrontPage(): Promise<Article[]> {
-        const result = await scrapeIt<{articles: Article[]}>(this.url, {
+    private async ScrapeArticlesInFrontPage(): Promise<{title: string, source: string}[]> {
+        const result = await scrapeIt<{articles: {title: string, source: string}[]}>(this.url, {
             articles: {
                 listItem: "article",
                 data: {
@@ -46,16 +52,16 @@ export class ElMundoReader implements ArticleReader {
     private async EnrichArticleData(article: Article): Promise<Article> {
         const mainArticleData = await this.ScrapeMainArticleData(article);
         return {
-            title: article.title,
-            body: mainArticleData.body[0].text,
-            source: article.source,
-            image: mainArticleData.image,
-            publisher: this.publisher,
+            Title: article.Title,
+            Body: mainArticleData.body[0].text,
+            Source: article.Source,
+            Image: mainArticleData.image,
+            Publisher: this.publisher,
         };
     }
 
     private async ScrapeMainArticleData(article: Article): Promise<any> {
-        const result = await scrapeIt<any>(article.source, {
+        const result = await scrapeIt<any>(article.Source, {
             body: {
                 listItem: "div.ue-l-article__body.ue-c-article__body",
                 data: {
