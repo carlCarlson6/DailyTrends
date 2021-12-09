@@ -9,6 +9,7 @@ import { AllFeedsComponent } from './feeds/all-feeds/all-feeds.component';
 import { FeedDatailComponent } from './feeds/feed-datail/feed-datail.component';
 import { CreateFeedComponent } from './feeds/create-feed/create-feed.component';
 import { FrontPageComponent } from './front-page/front-page.component';
+import { FeedCardComponent } from './feeds/feed-card/feed-card.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
         FeedDatailComponent,
         CreateFeedComponent,
         FrontPageComponent,
+        FeedCardComponent,
     ],
     imports: [
         BrowserModule,

@@ -7,17 +7,4 @@ import { FeedsService } from './services/feeds.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-    title = 'frontend';
-
-    feeds: Feeds = [];
-
-    constructor(
-        private readonly feedsService: FeedsService,
-    ) {}
-
-    ngOnInit(): void {
-        this.feedsService.getFeeds().subscribe(data => this.feeds = data);
-    }
-
-}
+export class AppComponent {}
