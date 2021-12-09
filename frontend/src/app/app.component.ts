@@ -1,10 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Feeds } from './models/feed';
+import { FeedsService } from './services/feeds.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'frontend';
+export class AppComponent implements OnInit {
+    title = 'frontend';
+
+    feeds: Feeds = [];
+
+    constructor(
+        private readonly feedsService: FeedsService,
+    ) {}
+
+    ngOnInit(): void {
+        this.feedsService.getFeeds().subscribe(data => this.feeds = data);
+    }
+
 }
