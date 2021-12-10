@@ -1,11 +1,17 @@
 <div class="card" style="width: 18rem;">
-    <img src={{feed?.image}} class="card-img-top" alt="...">
+    <img src={{feed.image}} class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title">{{feed?.title}}</h5>
-        <p class="card-text">{{feed?.body}}</p>
-        <div>
-            <a href={{feed?.source}} class="btn btn-outline-dark">Read it</a>
-            <button type="button" class="btn btn-outline-secondary">Edit it</button>
+        <h5 class="card-title">{{feed.title}}</h5>
+        <p class="card-text">{{displayBodyResume()}}</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <a href={{feed.source}} class="btn btn-outline-dark">Read it</a>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-outline-secondary">Edit</button>
+                </div>
+              </div>
         </div>
     </div>
 </div>

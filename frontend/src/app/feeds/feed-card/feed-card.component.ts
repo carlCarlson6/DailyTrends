@@ -7,5 +7,16 @@ import { Feed } from 'src/app/models/feed';
     styleUrls: ['./feed-card.component.scss']
 })
 export class FeedCardComponent  {
-    @Input() feed?: Feed;
+    @Input() feed!: Feed;
+
+    private displayMaxBodyLength = 240;
+
+    displayBodyResume(): string {
+        if (this.feed.body.length <= this.displayMaxBodyLength) {
+            return this.feed.body;
+        }
+
+        const resumeBody = this.feed.body.slice(0, 240).concat(' ...')
+        return resumeBody;
+    }
 }
