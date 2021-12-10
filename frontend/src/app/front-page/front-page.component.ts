@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Feeds } from '../models/feed';
+import { FeedsService } from '../services/feeds.service';
 
 @Component({
-  selector: 'app-front-page',
-  templateUrl: './front-page.component.html',
-  styleUrls: ['./front-page.component.scss']
+    selector: 'app-front-page',
+    templateUrl: './front-page.component.html',
 })
 export class FrontPageComponent implements OnInit {
 
-  constructor() { }
+    feeds: Feeds = []
 
-  ngOnInit(): void {
-  }
+    constructor(
+        private readonly feedsService: FeedsService
+    ) {}
+
+    ngOnInit(): void {
+        this.getFeeds();
+    }
+
+    getFeeds(): void {
+        this.feedsService.getFeedsByDate(new Date()).subscribe(data => this.feeds = data);
+    }
 
 }

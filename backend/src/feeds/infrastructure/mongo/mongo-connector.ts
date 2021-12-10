@@ -3,6 +3,7 @@ import { Feed } from "../../domain/entities/feed";
 import { config as readEnvConfig } from "dotenv";
 import { MongoContext } from "./mongo-context";
 import { injectable } from "inversify";
+import { FeedModel } from "./feed-model";
 
 export interface IMongoDbConnector {
     Connect(): Promise<MongoContext>;
@@ -25,7 +26,7 @@ export class MongoDbConnector implements IMongoDbConnector {
         await client.connect();
             
         const db = client.db(process.env.MONGO_DAILYTRENDS_DB!);
-        const feedsCollection = db.collection<Feed>(process.env.MONGO_FEEDS_COLLECTION_NAME!);
+        const feedsCollection = db.collection<FeedModel>(process.env.MONGO_FEEDS_COLLECTION_NAME!);
     
         return {
             feeds: feedsCollection

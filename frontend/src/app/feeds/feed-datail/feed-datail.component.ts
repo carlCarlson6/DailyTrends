@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-feed-datail',
-  templateUrl: './feed-datail.component.html',
-  styleUrls: ['./feed-datail.component.scss']
+    selector: 'app-feed-datail',
+    templateUrl: './feed-datail.component.html'
 })
-export class FeedDatailComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class FeedDatailComponent {}

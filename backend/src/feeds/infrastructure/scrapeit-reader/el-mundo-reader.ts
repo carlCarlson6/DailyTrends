@@ -69,7 +69,7 @@ export class ElMundoReader implements ArticleReader {
                 }
             },
             image: {
-                selector: "img",
+                selector: "img.ue-c-article__image",
                 attr: "src"
             }
         });

@@ -1,6 +1,6 @@
 import { Collection } from "mongodb";
-import { Feed } from "../../domain/entities/feed";
+import { FeedModel } from "./feed-model";
 
 export interface MongoContext {
-    feeds: Collection<Feed>
+    feeds: Collection<FeedModel>
 }

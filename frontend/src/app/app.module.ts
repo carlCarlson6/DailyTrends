@@ -9,6 +9,9 @@ import { AllFeedsComponent } from './feeds/all-feeds/all-feeds.component';
 import { FeedDatailComponent } from './feeds/feed-datail/feed-datail.component';
 import { CreateFeedComponent } from './feeds/create-feed/create-feed.component';
 import { FrontPageComponent } from './front-page/front-page.component';
+import { FeedCardComponent } from './feeds/feed-card/feed-card.component';
+import { FeedsService } from './services/feeds.service';
+import { FeedsInColumnsComponent } from './feeds/feeds-in-columns/feeds-in-columns.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +21,8 @@ import { FrontPageComponent } from './front-page/front-page.component';
         FeedDatailComponent,
         CreateFeedComponent,
         FrontPageComponent,
+        FeedCardComponent,
+        FeedsInColumnsComponent,
     ],
     imports: [
         BrowserModule,
@@ -25,7 +30,8 @@ import { FrontPageComponent } from './front-page/front-page.component';
         HttpClientModule,
     ],
     providers: [
-        ...baseUrlIncerceptorProviders
+        ...baseUrlIncerceptorProviders,
+        FeedsService
     ],
     bootstrap: [AppComponent]
 })

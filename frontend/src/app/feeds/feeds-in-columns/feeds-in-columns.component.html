@@ -1,0 +1,13 @@
+<div class="container" *ngFor="let feed of feeds; let indexOfelement = index;">
+    <div class="row">
+        <div class="col" *ngIf="indexOfelement*3 <= feeds.length-1">
+            <app-feed-card [feed]="feeds[indexOfelement*3]"></app-feed-card>
+        </div>
+        <div class="col" *ngIf="indexOfelement*3 <= feeds.length-2">
+            <app-feed-card [feed]="feeds[indexOfelement*3+1]"></app-feed-card>
+        </div>
+        <div class="col" *ngIf="indexOfelement*3 <= feeds.length-3">
+            <app-feed-card [feed]="feeds[indexOfelement*3+2]"></app-feed-card>
+        </div>
+    </div>
+</div>
