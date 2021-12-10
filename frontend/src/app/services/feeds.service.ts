@@ -9,7 +9,7 @@ import { Feed, Feeds } from "../models/feed";
 export class FeedsService {
     private feedsUrl = 'api/feeds';
     private httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     constructor(
