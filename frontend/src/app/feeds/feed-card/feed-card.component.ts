@@ -3,8 +3,7 @@ import { Feed } from 'src/app/models/feed';
 
 @Component({
     selector: 'app-feed-card',
-    templateUrl: './feed-card.component.html',
-    styleUrls: ['./feed-card.component.scss']
+    templateUrl: './feed-card.component.html'
 })
 export class FeedCardComponent  {
     @Input() feed!: Feed;

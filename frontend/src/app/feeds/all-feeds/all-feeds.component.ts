@@ -4,8 +4,7 @@ import { FeedsService } from 'src/app/services/feeds.service';
 
 @Component({
     selector: 'app-all-feeds',
-    templateUrl: './all-feeds.component.html',
-    styleUrls: ['./all-feeds.component.scss']
+    templateUrl: './all-feeds.component.html'
 })
 export class AllFeedsComponent implements OnInit {
     feeds: Feeds = [];
