@@ -1,3 +1,3 @@
 docker pull mongo
 
-docker run -d -p 27017:27017 --name catalog.db mongo
+docker run -d -p 27017:27017 --name dailytrends.db mongo
