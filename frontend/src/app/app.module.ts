@@ -10,6 +10,8 @@ import { FeedDatailComponent } from './feeds/feed-datail/feed-datail.component';
 import { CreateFeedComponent } from './feeds/create-feed/create-feed.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { FeedCardComponent } from './feeds/feed-card/feed-card.component';
+import { FeedsService } from './services/feeds.service';
+import { FeedsInColumnsComponent } from './feeds/feeds-in-columns/feeds-in-columns.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +22,7 @@ import { FeedCardComponent } from './feeds/feed-card/feed-card.component';
         CreateFeedComponent,
         FrontPageComponent,
         FeedCardComponent,
+        FeedsInColumnsComponent,
     ],
     imports: [
         BrowserModule,
@@ -27,7 +30,8 @@ import { FeedCardComponent } from './feeds/feed-card/feed-card.component';
         HttpClientModule,
     ],
     providers: [
-        ...baseUrlIncerceptorProviders
+        ...baseUrlIncerceptorProviders,
+        FeedsService
     ],
     bootstrap: [AppComponent]
 })
