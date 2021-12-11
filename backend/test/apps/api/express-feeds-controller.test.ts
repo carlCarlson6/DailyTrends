@@ -166,7 +166,7 @@ describe("Express Feeds Controller", () => {
                 requestMock.setup(r => r.params).returns({id: It.IsAny<string>()});
                 responseMock = setupResponseMock(responseMock, error);
 
-                await controller.Put(requestMock.object(), responseMock.object());
+                await controller.Delete(requestMock.object(), responseMock.object());
     
                 checkRepositoryTransactionError(responseMock, error);
             });

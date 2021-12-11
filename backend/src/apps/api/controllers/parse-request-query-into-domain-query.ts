@@ -5,10 +5,10 @@ import { FeedsByDateQuery } from "../../../feeds/domain/queries/feeds-by-date-qu
 export const ParseRequestQueryIntoDomainQuery = (request: Request): DomainQuery|null => {
     const requestQuery = request.query;
     
-    const dateQueryString = requestQuery.date;
+    const dateQueryString = requestQuery.date as string;
     if (!dateQueryString) {
         return null!;
     } else {
-        return new FeedsByDateQuery(new Date(dateQueryString as string));
+        return new FeedsByDateQuery(new Date(dateQueryString));
     }
 }

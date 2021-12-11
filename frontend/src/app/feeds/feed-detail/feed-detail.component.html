@@ -1,1 +1,38 @@
-<p>feed-datail works!</p>
+<form class="container" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input
+            type="text" class="form-control"  placeholder="Title" name="title"
+            [(ngModel)]="this.feed!.title" required
+        />
+    </div>
+
+    <div class="mb-3">
+        <textarea
+            class="form-control" id="body" placeholder="Body" rows="3" name="body"
+            [(ngModel)]="this.feed!.body" required
+        ></textarea>
+    </div>
+
+    <div class="mb-3">
+        <input
+            type="text" class="form-control" id="publisher" placeholder="Publisher" name="publisher"
+            [(ngModel)]="this.feed!.publisher" required
+        />
+    </div>
+
+    <div class="mb-3">
+        <input
+            type="text" class="form-control" id="image" placeholder="Image" name="image"
+            [(ngModel)]="this.feed!.image" required
+        />
+    </div>
+
+    <div class="mb-3">
+        <input
+            type="text" class="form-control" id="source" placeholder="Source" name="source"
+            [(ngModel)]="this.feed!.source" required
+        />
+    </div>
+
+    <button type="submit" class="btn btn-outline-dark" [disabled]="">Update</button>
+</form>

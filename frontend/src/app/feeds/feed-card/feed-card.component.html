@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="btn-group" role="group" aria-label="Default button group">
                 <a type="button" class="btn btn-outline-dark" href={{feed.source}} target="blank_">Read</a>
-                <button type="button" class="btn btn-outline-dark">Edit</button>
+                <button type="button" class="btn btn-outline-dark" routerLink="/feeds/{{feed.id}}">Edit</button>
                 <button type="button" class="btn btn-outline-dark" (click)="handleDelete()">Delete</button>
               </div>
         </div>
