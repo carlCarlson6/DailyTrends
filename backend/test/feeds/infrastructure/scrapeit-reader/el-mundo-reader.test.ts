@@ -19,7 +19,6 @@ describe("El Mundo reader", () => {
         expect(feeds).toHaveLength(5);
 
         feeds.forEach(feed => {
-            console.log(feed)
             expect(feed.Title).not.toEqual('');
             expect(feed.Body).not.toEqual('');
 
