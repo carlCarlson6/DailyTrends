@@ -63,7 +63,16 @@ export class ExpressFeedsController {
 
     async Put(request: Request, response: Response) {
         try {
-            const feedToUpdate = request.body as Feed;
+            const feedToUpdate = new Feed(
+                request.body.id,
+                request.body.title,
+                request.body.body,
+                request.body.image,
+                request.body.source,
+                request.body.publisher,
+                new Date(request.body.date),
+            );
+            //const feedToUpdate = request.body as Feed;
             await this.feedCrudService.Update(feedToUpdate);
             response.status(204).send();            
         } catch (error) {
