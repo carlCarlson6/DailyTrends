@@ -1,1 +1,23 @@
-<p>create-feed works!</p>
+<form class="container" [formGroup]="inputFeedForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title" />
+    </div>
+
+    <div class="mb-3">
+        <textarea class="form-control" id="body" formControlName="body" placeholder="Body" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <input type="text" class="form-control" id="publisher" formControlName="publisher" placeholder="Publisher" />
+    </div>
+
+    <div class="mb-3">
+        <input type="text" class="form-control" id="image" formControlName="image" placeholder="Image" />
+    </div>
+
+    <div class="mb-3">
+        <input type="text" class="form-control" id="source" formControlName="source" placeholder="Source" />
+    </div>
+
+    <button type="submit" class="btn btn-outline-dark" [disabled]="!inputFeedForm.valid">Submit</button>
+</form>
