@@ -1,16 +1,17 @@
 <div class="card" style="width: 18rem;">
-    <img src={{feed.image}} class="card-img-top" alt="...">
+    <img src={{feed.image}} class="card-img-top" />
+
     <div class="card-body">
         <h5 class="card-title">{{feed.title}}</h5>
+        <p>by <strong>{{feed.publisher}}</strong></p>
+
         <p class="card-text">{{displayBodyResume()}}</p>
+
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <a href={{feed.source}} class="btn btn-outline-dark">Read it</a>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-outline-secondary">Edit</button>
-                </div>
+            <div class="btn-group" role="group" aria-label="Default button group">
+                <a type="button" class="btn btn-outline-dark" href={{feed.source}} target="blank_">Read</a>
+                <button type="button" class="btn btn-outline-dark">Edit</button>
+                <button type="button" class="btn btn-outline-dark" (click)="handleDelete()">Delete</button>
               </div>
         </div>
     </div>
