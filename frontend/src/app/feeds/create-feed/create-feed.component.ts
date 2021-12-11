@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Feed, Feeds } from 'src/app/models/feed';
+import { Feed } from 'src/app/models/feed';
 import { FeedsService } from 'src/app/services/feeds.service';
 import { Location } from '@angular/common';
 
@@ -26,7 +26,6 @@ export class CreateFeedComponent {
 
     onSubmit(): void {
         const feed: Feed = this.inputFeedForm.value;
-        console.log(feed);
         this.feedsService.postFeed(feed).subscribe();
         this.location.back();
     }
