@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
     selector: 'app-feed-datail',
     templateUrl: './feed-detail.component.html'
 })
-export class FeedDetailComponent {}
+export class FeedDetailComponent {
+
+}
