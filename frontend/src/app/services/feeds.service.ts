@@ -48,7 +48,7 @@ export class FeedsService {
 
     updateFeed(feed: Feed): Observable<any> {
         const observableResponse = this.http.put(this.feedsUrl, feed, this.httpOptions).pipe(
-            catchError(this.handleError<any>('postFeed'))
+            catchError(this.handleError<any>('putFeed'))
         );
         return observableResponse;
     }
