@@ -17,5 +17,5 @@
 ## Improvements
 
 - [ ] Frontend testing.
-- [ ] More backend testing + integration and acceptationtests.
-- [ ] Decouple backend apps from feeds context by introducion mediator or CQRS pattern.
+- [ ] More backend testing + integration and acceptation tests.
+- [ ] Decouple backend apps from feeds context by introducion mediator or CQRS patterns.
