@@ -6,7 +6,7 @@ import { DomainQuery } from "../domain/queries/domain-query";
 import { FeedsByDateQuery } from "../domain/queries/feeds-by-date-query";
 import { FeedRepository } from "../domain/services/feed-repository";
 import { Logger } from "../domain/services/logger";
-import { FeedsByDateSpecification } from "../domain/specifications/feeds-by-date-specification";
+import { FeedsByDateSpecification } from "../domain/queries/specifications/feeds-by-date-specification";
 import { IFeedQueryHandler } from "./abstractions/feed-query-handler.interface";
 
 @injectable()

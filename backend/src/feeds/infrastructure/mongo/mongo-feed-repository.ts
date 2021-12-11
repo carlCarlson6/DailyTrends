@@ -4,7 +4,7 @@ import { Feed } from "../../domain/entities/feed";
 import { RepositoryTransactionError } from "../../domain/errors/repository-transaction-error";
 import { FeedRepository } from "../../domain/services/feed-repository";
 import { Logger } from "../../domain/services/logger";
-import { Specification } from "../../domain/specifications/specification";
+import { Specification } from "../../domain/queries/specifications/specification";
 import { intoDomainFeed, intoFeedModel } from "./feed-model";
 import { IMongoDbConnector } from "./mongo-connector";
 

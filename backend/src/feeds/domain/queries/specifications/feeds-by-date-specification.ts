@@ -1,4 +1,4 @@
-import { Feed } from "../entities/feed";
+import { Feed } from "../../entities/feed";
 import { Specification } from "./specification";
 
 export class FeedsByDateSpecification extends Specification<Feed> {

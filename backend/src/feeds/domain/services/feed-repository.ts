@@ -1,5 +1,5 @@
 import { Feed } from "../entities/feed";
-import { Specification } from "../specifications/specification";
+import { Specification } from "../queries/specifications/specification";
 
 export interface FeedRepository {
     Save(feed: Feed): Promise<void>;
