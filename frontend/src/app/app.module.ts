@@ -13,6 +13,7 @@ import { FeedCardComponent } from './feeds/feed-card/feed-card.component';
 import { FeedsService } from './services/feeds.service';
 import { FeedsInColumnsComponent } from './feeds/feeds-in-columns/feeds-in-columns.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         FrontPageComponent,
         FeedCardComponent,
         FeedsInColumnsComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         BrowserModule,
