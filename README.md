@@ -18,4 +18,4 @@
 
 - [ ] Frontend testing.
 - [ ] More backend testing + integration and acceptationtests.
-- [ ] Decouple apps from feeds context by introducion mediator or CQRS pattern.
+- [ ] Decouple backend apps from feeds context by introducion mediator or CQRS pattern.
