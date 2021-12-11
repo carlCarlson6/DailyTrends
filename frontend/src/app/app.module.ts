@@ -6,19 +6,20 @@ import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { baseUrlIncerceptorProviders } from './services/base-url-interceptor.service';
 import { AllFeedsComponent } from './feeds/all-feeds/all-feeds.component';
-import { FeedDatailComponent } from './feeds/feed-datail/feed-datail.component';
+import { FeedDetailComponent } from './feeds/feed-detail/feed-detail.component';
 import { CreateFeedComponent } from './feeds/create-feed/create-feed.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { FeedCardComponent } from './feeds/feed-card/feed-card.component';
 import { FeedsService } from './services/feeds.service';
 import { FeedsInColumnsComponent } from './feeds/feeds-in-columns/feeds-in-columns.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavigationBarComponent,
         AllFeedsComponent,
-        FeedDatailComponent,
+        FeedDetailComponent,
         CreateFeedComponent,
         FrontPageComponent,
         FeedCardComponent,
@@ -28,6 +29,8 @@ import { FeedsInColumnsComponent } from './feeds/feeds-in-columns/feeds-in-colum
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
     providers: [
         ...baseUrlIncerceptorProviders,
