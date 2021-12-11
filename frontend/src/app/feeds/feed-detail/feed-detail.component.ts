@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-feed-datail',
-    templateUrl: './feed-datail.component.html'
+    templateUrl: './feed-detail.component.html'
 })
-export class FeedDatailComponent {}
+export class FeedDetailComponent {}
